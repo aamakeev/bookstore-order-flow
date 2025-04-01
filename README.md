@@ -13,7 +13,7 @@ Initial task description:
 ---
 
 ## Repository Structure
-
+<pre> ```
 ├── README.md - provides an overview of the project and general information
 └── docs
     ├── api-description.yaml - details the specifications and endpoints of the APIs used in the system
@@ -46,6 +46,7 @@ Initial task description:
     │       ├── PaymentStateDiagram.png
     │       └── PaymentStateDiagram.svg
     └── workflow.md - text description of the order process flow
+``` </pre>
 
 ## Technologies Used
 
