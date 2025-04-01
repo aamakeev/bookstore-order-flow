@@ -1,7 +1,7 @@
 # Integration and Interfaces
 
 ## Overview
-This system follows a **modular, event-driven architecture** with REST APIs and asynchronous communication through **Apache Kafka**. The design adheres to the principles of Domain-Driven Design (DDD), focusing on aligning the software closely with the underlying business context and its domain logic. This approach facilitates a more intuitive and business-relevant development process, enhancing both scalability and maintainability.
+This system follows a **modular, event-driven architecture** with REST APIs and asynchronous communication through **Apache Kafka**. The design adheres to the principles of **Domain-Driven Design (DDD)**, focusing on aligning the software closely with the underlying business context and its domain logic. This approach facilitates a more intuitive and business-relevant development process, enhancing both scalability and maintainability.
 
 ---
 
