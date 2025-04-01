@@ -9,10 +9,10 @@ This system follows a **modular, event-driven architecture** with REST APIs and 
 
 | From       | To                | Endpoint                    | Purpose                          |
 |------------|-------------------|-----------------------------|----------------------------------|
-| Frontend   | Cart Service      | `GET /cart/{userId}`        | Retrieve user's cart             |
-| Frontend   | Checkout Service  | `POST /checkout`            | Process checkout details         |
-| Frontend   | Order Service     | `POST /orders`              | Create a new order               |
-| Frontend   | Payment Service   | `POST /payments`            | Start payment process            |
+| Frontend   | API Gateway       | `GET /cart/{userId}`        | Retrieve user's cart             |
+| Frontend   | API Gateway       | `POST /checkout`            | Process checkout details         |
+| Frontend   | API Gateway       | `POST /orders`              | Create a new order               |
+| Frontend   | API Gateway       | `POST /payments`            | Start payment process            |
 | PaymentSvc | Payment Gateway   | External redirect           | Collect payment details          |
 | Gateway    | Payment Service   | `POST /payment-callback`    | Notify of payment status         |
 
