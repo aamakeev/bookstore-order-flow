@@ -13,8 +13,7 @@ Initial task description:
 ---
 
 ## Repository Structure
-<pre> ```
-├── README.md - provides an overview of the project and general information
+<pre>├── README.md - provides an overview of the project and general information
 └── docs
     ├── api-description.yaml - details the specifications and endpoints of the APIs used in the system
     ├── entities.md - describes the key entities involved in the system and their attributes
@@ -45,8 +44,7 @@ Initial task description:
     │       ├── 08_PaymentStateDiagram.puml
     │       ├── PaymentStateDiagram.png
     │       └── PaymentStateDiagram.svg
-    └── workflow.md - text description of the order process flow
-``` </pre>
+    └── workflow.md - text description of the order process flow</pre>
 
 ## Technologies Used
 
