@@ -1,0 +1,79 @@
+@startuml SequenceDiagram
+actor User
+participant "Frontend" as FE
+participant "Cart Service" as CS
+participant "Checkout Service" as CHS
+participant "Order Service" as OS
+participant "Payment Service" as PS
+participant "Payment Gateway" as PG
+database "Catalog" as CDB
+database "Orders" as ODB
+database "Payments" as PDB
+participant "Kafka" as K
+
+activate User
+User -> FE: Open cart
+activate FE
+FE -> CS: GET /cart/{userId}
+activate CS
+CS -> CDB: Get product info
+activate CDB
+CDB --> CS: Return Cart details
+deactivate CDB
+CS --> FE: Return cart details
+deactivate CS
+FE --> User: Display cart
+deactivate FE
+
+User -> FE: User presses\n"Go to checkout" button
+activate FE
+FE -> CHS: POST /checkout
+activate CHS
+CHS -> CDB: Get product info
+activate CDB
+CDB --> CHS: Return data
+deactivate CDB
+CHS -> CHS: Calculate checkout info
+CHS --> FE: Return checkout info
+deactivate CHS
+FE --> User: Display Checkout info 
+deactivate FE
+
+
+User-> FE: User presses\n"Place order" button
+activate FE
+FE -> OS: POST /orders
+activate OS
+OS -> ODB: Create Order (status: created)
+OS -> K: Publish order.created
+OS --> FE: Order confirmation response
+deactivate OS
+FE --> User: Display payment \ninitialisation throbber
+FE -> PS: POST /payments
+activate PS
+PS -> PDB: Create Payment record (status: pending)
+PS -> PG: Initate payment
+activate PG
+PG --> PS: Return Payment URL
+PS --> FE: Provide URL to finalise payment
+deactivate PS
+FE --> User: Display payment page
+deactivate FE
+User -> FE: Finalise payment
+activate FE
+FE -> User: Show throbber until receiving \npayment result 
+PG -> PS: POST /payment-callback {status: success/failure}
+deactivate PG
+activate PS
+PS -> PDB: Update Payment status (paid/failed)
+PS -> ODB: Update Order status(paid/paymentFailed)
+alt Payment Success
+  PS -> K: Publish payment.success
+  PS --> FE: Return success
+else Payment Failed
+  PS -> K: Publish payment.failed
+  PS --> FE: Return fail
+end
+FE --> User: Display the result of payment \ndepending on the case
+deactivate User
+@enduml

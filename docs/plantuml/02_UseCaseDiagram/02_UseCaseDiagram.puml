@@ -1,0 +1,38 @@
+@startuml UseCaseDiagram
+actor User
+actor "Customer Support" as CS
+
+rectangle "Shopping" {
+  (View Cart) as VC
+  (View Checkout) as VCH
+  (Confirm Order) as CO
+  User --> VC
+  User --> VCH
+  User --> CO
+}
+
+rectangle "Payment Management" {
+  (Pay) as Pay
+  (Retry Payment) as RP
+  (Cancel Payment) as CP
+  (Request Refund) as RR
+  (View Payment Status) as VPS
+  User --> Pay
+  User --> RP
+  User --> CP
+  User --> RR
+  User --> VPS
+  CS --> VPS
+}
+
+rectangle "Order & Notification Management" {
+  (Update Order Status) as UOS
+  (View Order Status) as VOS
+  (Receive Notification/Confirmation) as RNC
+  User --> VOS
+  User --> RNC
+  CS --> VOS
+  CS --> UOS
+}
+
+@enduml

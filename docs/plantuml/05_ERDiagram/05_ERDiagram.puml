@@ -1,0 +1,57 @@
+@startuml ERDiagram
+
+entity User {
+  * id : INT
+  --
+  email : VARCHAR
+  name : VARCHAR
+}
+
+entity Cart {
+  * user_id : INT
+  item_ids : TEXT
+}
+
+entity Book {
+  * id : INT
+  title : VARCHAR
+  price : DECIMAL
+}
+
+entity Stock {
+  * book_id : INT
+  quantity : INT
+}
+
+entity Order {
+  * id : INT
+  user_id : INT
+  status : VARCHAR
+  created_at : DATETIME
+}
+
+entity Payment {
+  * id : INT
+  user_id : INT
+  order_id : INT
+  gateway_id : VARCHAR
+  status : VARCHAR
+}
+
+entity OrderItem {
+  * id : INT
+  order_id : INT
+  book_id : INT
+  quantity : INT
+}
+
+User "1" --> "*" Cart : "has"
+User "1" --> "*" Order : "places"
+User "1" --> "*" Payment : "initiates"
+Order "1" --> "*" Payment : "has"
+Order "1" --> "*" OrderItem : "contains"
+Book "1" --> "*" OrderItem : "included in"
+Book "1" --> "1" Stock : "has"
+Cart "1" --> "*" Book : "selected items"
+
+@enduml

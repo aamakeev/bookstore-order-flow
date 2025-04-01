@@ -1,0 +1,44 @@
+@startuml ActivityDiagram
+start
+:User opens the cart;
+:Display Book(s) ready for checkout;
+:User taps on Buy button;
+:Display Chechout screen;
+if (Confirm Order?) then (Yes)
+  :Create Order (status: created);
+  :Trigger event OrderCreated;
+  :Transition to Payment;
+else (No)
+  :User aborts or edits cart;
+  stop
+endif
+:Initiate Payment;
+:Create Payment record (status: pending);
+:Redirect to Payment Gateway;
+:User completes payment;
+partition Callback {
+  :Receive callback from Gateway;
+  if (Payment Success?) then (Yes)
+    :Update Payment & Order to 'paid';
+    :Trigger event OrderPaid;
+    :Show Confirmation Screen;
+  else if (Payment Failed?) then (No)
+    :Update Payment to 'failed';
+    :Show error message;
+    :Prompt to retry;
+  else if (User Cancels?) then (Cancel)
+    :Update Payment to 'cancelled';
+    :Notify cancellation;
+  else (Timeout)
+    :Update Payment to 'timeout';
+    :Prompt to retry;
+  endif
+}
+if (Refund Requested?) then (Yes)
+  :Trigger refund process;
+  :Update Payment to 'refunded';
+  end
+else (No)
+endif
+stop
+@enduml

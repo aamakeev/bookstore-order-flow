@@ -1,0 +1,6 @@
+@startuml BookStateDiagram
+[*] --> available
+available --> reserved : When checkout openned (optionally)
+reserved --> out_of_stock : When stock exhausted or after timeout
+out_of_stock --> archived : After prolonged unavailability
+@enduml

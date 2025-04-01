@@ -1,0 +1,46 @@
+@startuml ComponentDiagram
+
+package "Web Application" {
+  [Frontend]
+}
+
+package "Backend Services" {
+  [API Gateway]
+  [Cart & Checkout Service]
+  [Order Service]
+  [Payment Service]
+  [Notification Service]
+  [Kafka]
+
+  [Frontend] --> [API Gateway] : GET /cart/{userId} \n POST /checkout/\n POST /orders\nPOST /payment
+  [API Gateway] --> [Cart & Checkout Service]
+  [API Gateway] --> [Order Service] : Routing
+  [API Gateway] --> [Payment Service]
+  
+  [Order Service] --> [Kafka] : Publish: \norder.created\n\nSubscribe:\npayment
+  [Payment Service] --> [Kafka] : Publish:\n order.paid, \npayment.refunded,\npayment.failed
+  [Kafka] <-- [Notification Service] : Subscribe
+  [Notification Service] --> [Frontend] : Notify users about result
+  
+  database "Data Storage" {
+  database [Orders]
+  database [Payments]
+  [Order Service] --> [Orders]
+  [Payment Service] --> [Payments]
+  }
+}
+
+cloud "External Systems" {
+  [Payment Service] --> [Payment Gateway] : Redirect / Callback
+  [Secure Payment Form]
+  [Frontend] --> [Secure Payment Form] : User enters \npayment details
+  [Secure Payment Form] --> [Payment Service] : Submit payment\n data securely
+  package "Analitics systems" {
+    [Mixpanel]
+    [Google Analytics]
+  }
+  [Frontend] --> [Mixpanel] 
+  [Frontend] --> [Google Analytics] : Track user interactions
+}
+
+@enduml

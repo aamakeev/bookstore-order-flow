@@ -1,0 +1,72 @@
+- Endpoint: GET /cart/{userId}
+  Description: Retrieve the cart for a specific user
+  Headers:
+    - Authorization: Bearer token
+  Parameters:
+    - userId: string
+  Returns:
+    - cartDetails: object
+  Errors:
+    - 401 Unauthorized: Invalid or expired JWT token
+    - 404 Not Found: User ID does not exist or cart is empty
+
+- Endpoint: POST /checkout
+  Description: Process checkout details
+  Headers:
+    - Authorization: Bearer token
+  Body:
+    - userId: string
+    - items: array of book IDs
+  Returns:
+    - checkoutInfo: object
+  Errors:
+    - 400 Bad Request: Missing or invalid body parameters
+    - 401 Unauthorized: Invalid or expired JWT token
+    - 404 Not Found: Items not found or unavailable
+
+- Endpoint: POST /orders
+  Description: Create a new order
+  Headers:
+    - Authorization: Bearer token
+  Body:
+    - userId: string
+    - items: array of book IDs
+  Returns:
+    - orderId: string
+    - status: enum (created, paid)
+  Errors:
+    - 400 Bad Request: Missing or invalid body parameters
+    - 401 Unauthorized: Invalid or expired JWT token
+    - 500 Internal Server Error: Unable to create order
+
+- Endpoint: POST /payments
+  Description: Initiate payment for an order
+  Headers:
+    - Authorization: Bearer token
+  Body:
+    - orderId: string
+  Returns:
+    - paymentId: string
+    - redirectUrl: string
+  Errors:
+    - 400 Bad Request: Missing or invalid orderId
+    - 401 Unauthorized: Invalid or expired JWT token
+    - 404 Not Found: Order not found
+    - 500 Internal Server Error: Payment processing failed
+
+- Endpoint: POST /payment-callback
+  Description: Receive payment status from the payment gateway
+  Headers:
+    - Authorization: API key or bearer token
+  Security:
+    - IP Whitelistin (recommended): Only accept requests from known payment gateway IPs
+  Body:
+    - paymentId: string
+    - status: enum (success, failure)
+  Returns:
+    - confirmationStatus: enum (confirmed, failed)
+  Errors:
+    - 400 Bad Request: Missing or invalid paymentId or status
+    - 401 Unauthorized: Invalid or missing API key/bearer token
+    - 403 Forbidden: Request from unwhitelisted IP
+    - 500 Internal Server Error: Error processing payment status

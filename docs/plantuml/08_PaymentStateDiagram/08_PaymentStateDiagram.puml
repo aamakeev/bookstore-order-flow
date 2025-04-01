@@ -1,0 +1,8 @@
+@startuml PaymentStateDiagram
+[*] --> pending
+pending --> success : On successful callback
+pending --> failed : On failure callback
+pending --> cancelled : If user cancels
+pending --> timeout : After inactivity
+success --> refunded : On refund trigger
+@enduml

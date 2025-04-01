@@ -1,0 +1,7 @@
+@startuml OrderStateDiagram
+[*] --> created
+created --> paid : When payment successful
+created --> paymentFailed: When payment failed
+paid --> refunded : On refund process
+created --> cancelled : If order cancelled before payment
+@enduml
