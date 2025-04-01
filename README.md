@@ -20,29 +20,36 @@ The analysis begins from the moment the user initiates the checkout (with the bo
     ├── entities.md - describes the key entities involved in the system and their attributes
     ├── integration.md - outlines the process of integrating the various system components and external services
     ├── plantuml - contains various UML diagrams that visually represent different aspects of the system architecture and processes
+    │   ├── 01_ComponentDiagram
+    │   │   ├── ComponentDiagram.puml
+    │   │   ├── ComponentDiagram.png
+    │   │   └── ComponentDiagram.svg
+    │   ├── 02_UseCaseDiagram
+    │   │   ├── UseCaseDiagram.puml
+    │   │   ├── UseCaseDiagram.png
     │   │   └── UseCaseDiagram.svg
     │   ├── 03_ActivityDiagram
-    │   │   ├── 03_ActivityDiagram.puml
+    │   │   ├── ActivityDiagram.puml
     │   │   ├── ActivityDiagram.png
     │   │   └── ActivityDiagram.svg
     │   ├── 04_SequenceDiagram
-    │   │   ├── 04_SequenceDiagram.puml
+    │   │   ├── SequenceDiagram.puml
     │   │   ├── SequenceDiagram.png
     │   │   └── SequenceDiagram.svg
     │   ├── 05_ERDiagram
-    │   │   ├── 05_ERDiagram.puml
+    │   │   ├── ERDiagram.puml
     │   │   ├── ERDiagram.png
     │   │   └── ERDiagram.svg
     │   ├── 06_BookStateDiagram
-    │   │   ├── 06_BookStateDiagram.puml
+    │   │   ├── BookStateDiagram.puml
     │   │   ├── BookStateDiagram.png
     │   │   └── BookStateDiagram.svg
     │   ├── 07_OrderStateDiagram
-    │   │   ├── 07_OrderStateDiagram.puml
+    │   │   ├── OrderStateDiagram.puml
     │   │   ├── OrderStateDiagram.png
     │   │   └── OrderStateDiagram.svg
     │   └── 08_PaymentStateDiagram
-    │       ├── 08_PaymentStateDiagram.puml
+    │       ├── PaymentStateDiagram.puml
     │       ├── PaymentStateDiagram.png
     │       └── PaymentStateDiagram.svg
     └── workflow.md - text description of the order process flow</pre>
