@@ -4,7 +4,6 @@ This repository presents a **complete system analysis** of the process of purcha
 The analysis begins from the moment the user initiates the checkout (with the book already in the cart) and ends at the payment confirmation stage.
 
 ## Initial task description:  
-<pre>
 Покупка Книги в интернет магазине  
   
 Разложите на бизнес и системную составляющую, процесс покупки книги в интернет-магазине, начиная с момента оформления заказа и заканчивая подтверждением платежа (вы давний пользователь данного магазина и нужная вам книга уже у вас в корзине, и когда вы совершите оплату, то заветную книгу вам каким-то волшебным образом доставят эльфы, не раскрывайте их процессных тайн).  
@@ -14,7 +13,7 @@ The analysis begins from the moment the user initiates the checkout (with the bo
 Постройте схему, отразите в вашем workflow - все этапы, все кейсы, возможные альтернативы.  
   
 Для построение схемы можете использовать любой софт, позволяющий просмотреть вашу работу внешним пользователям."
-</pre>
+
 ---
 
 ## Repository Structure
